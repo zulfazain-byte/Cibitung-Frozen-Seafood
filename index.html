@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cibitung Frozen Seafood - Pemasok Tangan Pertama</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        ocean: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            700: '#0369a1',
+                            900: '#0c4a6e', // Navy Blue
+                            950: '#082f49',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Kustomisasi tambahan */
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(12, 74, 110, 0.8), rgba(8, 47, 73, 0.9)), url('https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .b2b-bg {
+            background-image: linear-gradient(rgba(3, 105, 161, 0.9), rgba(12, 74, 110, 0.95)), url('https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Animasi Kustom untuk Visualisasi Alur Pemesanan */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
+            100% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+        /* Animasi Mengambang (Floating) untuk Gambar */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float-slow {
+            animation: float 5s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 5s ease-in-out infinite;
+            animation-delay: 2.5s;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-ocean-500 selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- Jika Anda sudah memiliki gambar logo, HAPUS tanda komentar pada tag <img> di bawah ini dan masukkan link gambarnya -->
+                    <!-- <img src="link-gambar-logo-anda.png" alt="Logo Cibitung Frozen Seafood" class="h-10 w-auto"> -->
+                    
+                    <i class="fa-solid fa-fish-fins text-3xl text-ocean-500"></i>
+                    <div>
+                        <h1 class="font-bold text-xl text-ocean-900 leading-tight">CIBITUNG</h1>
+                        <p class="text-xs font-semibold text-ocean-500 tracking-widest">FROZEN SEAFOOD</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#tentang" class="text-gray-600 hover:text-ocean-500 font-medium transition-colors">Tentang Kami</a>
+                    <a href="#keunggulan" class="text-gray-600 hover:text-ocean-500 font-medium transition-colors">Keunggulan</a>
+                    <a href="#katalog" class="text-gray-600 hover:text-ocean-500 font-medium transition-colors">Katalog</a>
+                    <a href="#layanan-b2b" class="text-gray-600 hover:text-ocean-500 font-medium transition-colors">Layanan B2B</a>
+                </div>
+                <div class="hidden md:flex">
+                    <a href="https://api.whatsapp.com/send?phone=6285284806269&text=Halo%20Tim%20Cibitung%20Frozen%20Seafood,%20saya%20tertarik%20untuk%20berlangganan%20dan%20ingin%20mendapatkan%20informasi%20harga%20partai%20terbaru." target="_blank" class="bg-ocean-500 hover:bg-ocean-600 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg shadow-ocean-500/30">
+                        Minta Penawaran
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-ocean-500 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#tentang" class="block px-3 py-2 text-gray-600 font-medium hover:bg-ocean-50 rounded-md">Tentang Kami</a>
+                <a href="#keunggulan" class="block px-3 py-2 text-gray-600 font-medium hover:bg-ocean-50 rounded-md">Keunggulan</a>
+                <a href="#katalog" class="block px-3 py-2 text-gray-600 font-medium hover:bg-ocean-50 rounded-md">Katalog</a>
+                <a href="#layanan-b2b" class="block px-3 py-2 text-gray-600 font-medium hover:bg-ocean-50 rounded-md">Layanan B2B</a>
+                <a href="#kontak" class="block px-3 py-2 text-ocean-500 font-bold hover:bg-ocean-50 rounded-md">Hubungi Kami</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center w-full">
+            <div class="md:w-2/3 text-center md:text-left text-white py-12 px-2 sm:px-0">
+                <span class="inline-block py-1 px-3 rounded-full bg-ocean-500/20 border border-ocean-400 text-ocean-100 text-xs sm:text-sm font-semibold tracking-wider mb-6">
+                    <i class="fa-solid fa-anchor mr-2"></i>PEMASOK TANGAN PERTAMA
+                </span>
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                    Mitra Terpercaya <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-200">Rantai Pasok Boga Bahari</span><br/>
+                    Bisnis Kuliner Anda.
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto md:mx-0">
+                    Kami mengamankan margin keuntungan dan ketersediaan stok bahan baku dapur Anda langsung dari sumber utama, secara higienis, tepat waktu, dan efisien.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#katalog" class="bg-ocean-500 hover:bg-ocean-600 text-white px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all shadow-lg shadow-ocean-500/40 text-center">
+                        Lihat Katalog Produk
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=6285284806269&text=Halo%20Tim%20Cibitung%20Frozen%20Seafood,%20saya%20ingin%20menjadwalkan%20tester%20produk%20ke%20dapur%20saya." target="_blank" class="bg-transparent border-2 border-white hover:bg-white hover:text-ocean-900 text-white px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all text-center">
+                        Jadwalkan Tester
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Wave Divider -->
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[30px] sm:h-[50px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.81,119.28,200.73,109.8,241.6,104.29,281.46,80.57,321.39,56.44Z" class="fill-gray-50"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Tentang Kami & Tantangan -->
+    <section id="tentang" class="py-16 md:py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Text -->
+                <div>
+                    <h2 class="text-ocean-500 font-bold tracking-wider uppercase mb-2 text-sm sm:text-base">Tentang Kami</h2>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-ocean-950 mb-4">Kualitas hidangan laut selalu bermula dari kesegaran bahan baku.</h3>
+                    
+                    <!-- Badge Legalitas NIB -->
+                    <div class="inline-flex items-center bg-green-50 text-green-700 px-4 py-2 rounded-lg border border-green-200 mb-6 shadow-sm">
+                        <i class="fa-solid fa-certificate text-green-500 text-xl mr-3"></i>
+                        <div class="text-xs sm:text-sm">
+                            <p class="font-bold">Terdaftar Resmi & Tersertifikasi</p>
+                            <p class="font-medium text-green-600">NIB: 202603-1409-1007-5574-041</p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-600 mb-6 text-base sm:text-lg leading-relaxed">
+                        Cibitung Frozen Seafood hadir berdedikasi menjaga konsistensi rasa dan efisiensi dapur Anda. Melalui fasilitas distribusi dan penyimpanan suhu dingin (<em>cold storage</em>) strategis di Cibitung, Bekasi, kami mendistribusikan produk laut segar langsung ke fasilitas Anda.
+                    </p>
+                    
+                    <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-xl shadow-gray-200 mt-8 border-l-4 border-ocean-500">
+                        <h4 class="font-bold text-ocean-900 mb-4 text-lg sm:text-xl">Kami Mengerti Tantangan Dapur Anda:</h4>
+                        <ul class="space-y-3 text-sm sm:text-base">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-circle-xmark text-red-400 mt-1 mr-3 flex-shrink-0"></i>
+                                <span class="text-gray-600"><strong>Harga Mencekik:</strong> Biaya perantara menggerus margin keuntungan Anda.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-circle-xmark text-red-400 mt-1 mr-3 flex-shrink-0"></i>
+                                <span class="text-gray-600"><strong>Kualitas Labil:</strong> Tekstur daging hancur akibat pembekuan buruk.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-circle-xmark text-red-400 mt-1 mr-3 flex-shrink-0"></i>
+                                <span class="text-gray-600"><strong>Stok Kosong:</strong> Pasokan telat saat restoran sedang ramai.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-circle-xmark text-red-400 mt-1 mr-3 flex-shrink-0"></i>
+                                <span class="text-gray-600"><strong>Beban Staf:</strong> Waktu terbuang memotong & membersihkan ikan.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Image Grid dengan Animasi Mengambang & Hover Interaktif -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-4 relative pt-8 lg:pt-0">
+                    <div class="absolute -inset-2 sm:-inset-4 bg-ocean-100 rounded-3xl transform rotate-3 -z-10 transition-all duration-500"></div>
+                    
+                    <!-- Gambar 1 -->
+                    <div class="overflow-hidden rounded-xl sm:rounded-2xl shadow-lg animate-float-slow group cursor-pointer border border-ocean-100">
+                        <img src="https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?q=80&w=600&auto=format&fit=crop" alt="[Gambar Ikan di Cold Storage]" class="w-full h-40 sm:h-56 md:h-64 object-cover transform transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    
+                    <!-- Gambar 2 -->
+                    <div class="overflow-hidden rounded-xl sm:rounded-2xl shadow-lg mt-6 sm:mt-8 animate-float-delayed group cursor-pointer border border-ocean-100">
+                        <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=600&auto=format&fit=crop" alt="[Gambar Ikan Segar di Atas Es]" class="w-full h-40 sm:h-56 md:h-64 object-cover transform transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keunggulan (Solusi) -->
+    <section id="keunggulan" class="py-16 md:py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-ocean-500 font-bold tracking-wider uppercase mb-2 text-sm sm:text-base">Solusi Strategis</h2>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-ocean-950 mb-4">Mengapa Memilih Kami?</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg">Kami bukan sekadar <em>supplier</em>; kami adalah mitra strategis yang melindungi margin keuntungan bisnis Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="bg-gray-50 rounded-3xl p-6 sm:p-8 border border-gray-100 hover:shadow-2xl hover:shadow-ocean-900/10 transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-ocean-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-ocean-500 transition-colors">
+                        <i class="fa-solid fa-tags text-xl sm:text-2xl text-ocean-600 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-xl sm:text-2xl font-bold text-ocean-900 mb-3">Jaminan Harga Termurah</h4>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                        Kami mengambil produk <strong>langsung dari produsen utama</strong>. Tanpa perantara tambahan, kami menjamin harga kami jauh lebih murah dibandingkan pasar lokal/marketplace. HPP terbaik untuk Anda.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-gray-50 rounded-3xl p-6 sm:p-8 border border-gray-100 hover:shadow-2xl hover:shadow-ocean-900/10 transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-500 transition-colors">
+                        <i class="fa-solid fa-snowflake text-xl sm:text-2xl text-cyan-600 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-xl sm:text-2xl font-bold text-ocean-900 mb-3">Keunggulan Produk Beku</h4>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                        Prioritas utama kami adalah menyuplai produk utuh dalam keadaan <strong>beku (frozen)</strong>. Membeli dalam bentuk beku memberikan Anda umur simpan lebih panjang, manajemen stok yang mudah, dan mengamankan HPP ke titik paling efisien.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-gray-50 rounded-3xl p-6 sm:p-8 border border-gray-100 hover:shadow-2xl hover:shadow-ocean-900/10 transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
+                        <i class="fa-solid fa-truck-fast text-xl sm:text-2xl text-blue-600 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-xl sm:text-2xl font-bold text-ocean-900 mb-3">Stabilitas Pasokan</h4>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                        Kapasitas suplai stabil mencapai <strong>1 Ton per bulan</strong>. Kami mengamankan ketersediaan bahan baku Anda, bahkan di saat permintaan pasar sedang melonjak tajam.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Katalog Produk -->
+    <section id="katalog" class="py-16 md:py-20 bg-ocean-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-12 gap-4">
+                <div>
+                    <h2 class="text-ocean-500 font-bold tracking-wider uppercase mb-2 text-sm sm:text-base">Katalog Unggulan</h2>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-ocean-950">Komoditas Utama Kami</h3>
+                </div>
+                <div class="bg-white px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-ocean-100 shadow-sm inline-flex items-center">
+                    <i class="fa-solid fa-temperature-arrow-down text-cyan-500 mr-2"></i>
+                    <span class="text-xs sm:text-sm font-semibold text-ocean-900">Penyimpanan Suhu Ideal Anti Weight-Loss</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+                <!-- Product Items -->
+                <!-- Item 1 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar ikan Banjar Anda -->
+                        <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=400&auto=format&fit=crop" alt="[Gambar Ikan Banjar]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Ikan Banjar</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Packing Kardus / Plastik</p>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar ikan Layang Anda -->
+                        <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop" alt="[Gambar Ikan Layang]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Ikan Layang</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Beku Segar</p>
+                </div>
+                <!-- Item 3 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar ikan Belo Anda -->
+                        <img src="https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?q=80&w=400&auto=format&fit=crop" alt="[Gambar Ikan Belo]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Ikan Belo</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Beku Segar</p>
+                </div>
+                <!-- Item 4 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar ikan Tongkol Anda -->
+                        <img src="https://images.unsplash.com/photo-1534043464124-3be32fe000c9?q=80&w=400&auto=format&fit=crop" alt="[Gambar Ikan Tongkol]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Ikan Tongkol</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Beku Segar</p>
+                </div>
+                <!-- Item 5 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar ikan Salem Anda -->
+                        <img src="https://plus.unsplash.com/premium_photo-1678297270385-ad506712660d?q=80&w=400&auto=format&fit=crop" alt="[Gambar Ikan Salem]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Ikan Salem</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Beku Segar</p>
+                </div>
+                <!-- Item 6 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar ikan Tenggiri Anda -->
+                        <img src="https://images.unsplash.com/photo-1521568289886-f446ecbc7a34?q=80&w=400&auto=format&fit=crop" alt="[Gambar Ikan Tenggiri]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Ikan Tenggiri</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Kualitas Premium</p>
+                </div>
+                <!-- Item 7 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar Bawal Laut Anda -->
+                        <img src="https://images.unsplash.com/photo-1580464670005-72863ad13fb7?q=80&w=400&auto=format&fit=crop" alt="[Gambar Bawal Laut]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Bawal Laut</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Beku Segar</p>
+                </div>
+                <!-- Item 8 -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:border-ocean-400 hover:shadow-lg transition-all duration-300 text-center group transform hover:-translate-y-1">
+                    <div class="w-full h-24 sm:h-32 md:h-40 mx-auto bg-gray-100 rounded-xl overflow-hidden mb-3 sm:mb-4 relative">
+                        <!-- Ganti src di bawah dengan link gambar Cumi Anda -->
+                        <img src="https://images.unsplash.com/photo-1625944227301-44709ee09cd8?q=80&w=400&auto=format&fit=crop" alt="[Gambar Cumi Kondom]" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-ocean-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    </div>
+                    <h4 class="font-bold text-ocean-900 text-base sm:text-lg">Cumi Kondom</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Bersih & Kenyal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan B2B Eksklusif -->
+    <section id="layanan-b2b" class="py-16 md:py-24 b2b-bg text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <!-- Badge -->
+                <div class="absolute top-0 right-0 bg-yellow-400 text-ocean-950 font-bold px-4 md:px-6 py-2 rounded-bl-2xl text-[10px] md:text-sm uppercase tracking-wider">
+                    Layanan Opsional B2B
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">Optimalisasi Beku Utuh, Fleksibilitas Layanan Terpadu.</h2>
+                        <p class="text-cyan-100 text-base sm:text-lg mb-6 md:mb-8 leading-relaxed">
+                            Kami mengedepankan pasokan produk dalam kondisi <strong>beku utuh (frozen)</strong> guna menjamin ketahanan kualitas, umur simpan yang maksimal, dan efisiensi manajemen stok Anda. Guna mendukung operasional dapur berskala besar (pemesanan minimum 2 Kuintal), kami juga menyediakan opsi penyesuaian layanan eksklusif (<em>skema biaya tambahan dapat didiskusikan secara komprehensif</em>):
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                        <i class="fa-solid fa-scissors text-white text-lg md:text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg md:text-xl font-bold text-white">Custom Cut <span class="text-sm font-normal text-yellow-300">(Layanan Opsional)</span></h4>
+                                    <p class="text-cyan-100 mt-1 text-sm md:text-base">Pemotongan presisi yang dapat disesuaikan dengan Standar Operasional Prosedur (SOP) dapur Anda guna menunjang efisiensi waktu penyajian.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                        <i class="fa-solid fa-box-archive text-white text-lg md:text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg md:text-xl font-bold text-white">Pengemasan Vakum <span class="text-sm font-normal text-yellow-300">(Layanan Opsional)</span></h4>
+                                    <p class="text-cyan-100 mt-1 text-sm md:text-base">Pengemasan kedap udara premium untuk mengoptimalkan ruang penyimpanan, menjaga kualitas kesegaran, serta mencegah risiko kontaminasi silang.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right mt-8 md:mt-0">
+                        <div class="inline-block bg-white text-ocean-950 p-6 md:p-8 rounded-3xl shadow-xl text-center border-b-8 border-cyan-500 w-full md:w-auto">
+                            <h4 class="text-xl md:text-2xl font-bold mb-2">Mari Berdiskusi</h4>
+                            <p class="text-gray-600 mb-6 font-medium text-sm md:text-base">Temukan solusi pasokan beku paling efisien.</p>
+                            <a href="https://api.whatsapp.com/send?phone=6285284806269&text=Halo%20Tim%20Cibitung%20Frozen%20Seafood,%20saya%20ingin%20berdiskusi%20mengenai%20kebutuhan%20seafood%20beku%20dan%20kemungkinan%20layanan%20tambahan." target="_blank" class="block w-full bg-ocean-600 hover:bg-ocean-700 text-white font-bold py-3 md:py-4 rounded-xl transition-colors text-base md:text-lg">
+                                Hubungi Konsultan Kami
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualisasi Alur Pemesanan (Cara Kerja) -->
+    <section id="cara-kerja" class="py-16 md:py-24 bg-ocean-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-ocean-500 font-bold tracking-wider uppercase mb-2 text-sm sm:text-base">Sederhana & Transparan</h2>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-ocean-950">Alur Kerja Sama B2B Kami</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg mt-4">Sistem kerja sama yang mudah untuk mengamankan kualitas dan ketersediaan rantai pasok dapur Anda.</p>
+            </div>
+
+            <div class="relative mt-8 md:mt-12">
+                <!-- Garis Penghubung (Hanya Desktop) -->
+                <div class="hidden md:block absolute top-[40px] left-1/2 w-[75%] -translate-x-1/2 h-1 bg-ocean-200 z-0"></div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="text-center group">
+                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto bg-white border-4 border-ocean-100 rounded-full flex items-center justify-center mb-4 md:mb-6 relative group-hover:border-ocean-500 transition-all duration-300 animate-pulse-ring" style="animation-delay: 0s;">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-ocean-50 rounded-full flex items-center justify-center group-hover:bg-ocean-500 transition-colors duration-300">
+                                <i class="fa-solid fa-comments text-lg md:text-xl text-ocean-500 group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                            <div class="absolute -top-1 -right-1 md:-top-2 md:-right-2 bg-yellow-400 text-ocean-950 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold text-sm md:text-base shadow-md">1</div>
+                        </div>
+                        <h4 class="font-bold text-ocean-900 text-base md:text-lg mb-2">Konsultasi Kebutuhan</h4>
+                        <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Diskusikan volume kebutuhan bulanan, jenis ikan, dan spesifikasi pesanan dapur Anda.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center group">
+                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto bg-white border-4 border-ocean-100 rounded-full flex items-center justify-center mb-4 md:mb-6 relative group-hover:border-ocean-500 transition-all duration-300 animate-pulse-ring" style="animation-delay: 0.6s;">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-ocean-50 rounded-full flex items-center justify-center group-hover:bg-ocean-500 transition-colors duration-300">
+                                <i class="fa-solid fa-box-open text-lg md:text-xl text-ocean-500 group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                            <div class="absolute -top-1 -right-1 md:-top-2 md:-right-2 bg-yellow-400 text-ocean-950 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold text-sm md:text-base shadow-md">2</div>
+                        </div>
+                        <h4 class="font-bold text-ocean-900 text-base md:text-lg mb-2">Kirim Sampel (Tester)</h4>
+                        <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Kami mengirimkan sampel produk agar Anda bisa langsung menguji kesegaran dan kepadatan teksturnya.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center group">
+                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto bg-white border-4 border-ocean-100 rounded-full flex items-center justify-center mb-4 md:mb-6 relative group-hover:border-ocean-500 transition-all duration-300 animate-pulse-ring" style="animation-delay: 1.2s;">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-ocean-50 rounded-full flex items-center justify-center group-hover:bg-ocean-500 transition-colors duration-300">
+                                <i class="fa-solid fa-file-signature text-lg md:text-xl text-ocean-500 group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                            <div class="absolute -top-1 -right-1 md:-top-2 md:-right-2 bg-yellow-400 text-ocean-950 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold text-sm md:text-base shadow-md">3</div>
+                        </div>
+                        <h4 class="font-bold text-ocean-900 text-base md:text-lg mb-2">Kontrak Harga Tangan Pertama</h4>
+                        <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Penguncian harga partai besar yang lebih murah dari pasar, lengkap dengan jadwal pengiriman.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="text-center group">
+                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto bg-white border-4 border-ocean-100 rounded-full flex items-center justify-center mb-4 md:mb-6 relative group-hover:border-ocean-500 transition-all duration-300 animate-pulse-ring" style="animation-delay: 1.8s;">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-ocean-50 rounded-full flex items-center justify-center group-hover:bg-ocean-500 transition-colors duration-300">
+                                <i class="fa-solid fa-truck-fast text-lg md:text-xl text-ocean-500 group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                            <div class="absolute -top-1 -right-1 md:-top-2 md:-right-2 bg-yellow-400 text-ocean-950 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold text-sm md:text-base shadow-md">4</div>
+                        </div>
+                        <h4 class="font-bold text-ocean-900 text-base md:text-lg mb-2">Pengiriman Rutin</h4>
+                        <p class="text-gray-500 text-xs md:text-sm leading-relaxed">Stok Anda aman! Produk dikirim secara rutin, higienis, dan terukur langsung ke fasilitas Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Kontak CTA -->
+    <section id="kontak" class="bg-ocean-950 pt-16 md:pt-20 pb-8 md:pb-10 border-t-4 border-cyan-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 mb-12 md:mb-16">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-fish-fins text-3xl md:text-4xl text-cyan-500"></i>
+                        <div>
+                            <h1 class="font-bold text-xl md:text-2xl text-white leading-tight">CIBITUNG</h1>
+                            <p class="text-[10px] md:text-xs font-semibold text-cyan-400 tracking-widest">FROZEN SEAFOOD</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 max-w-md leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
+                        Kepercayaan dibangun di atas bukti. Amankan margin keuntungan dan stok dapur Anda bersama kami sebagai pemasok tangan pertama Anda.
+                    </p>
+                    <div class="flex space-x-4 mb-6 md:mb-8">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-ocean-500 transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-ocean-500 transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+
+                    <!-- Informasi Legalitas -->
+                    <div class="border-t border-ocean-800 pt-6">
+                        <h4 class="text-cyan-500 font-semibold mb-2 flex items-center text-sm md:text-base">
+                            <i class="fa-solid fa-shield-halved mr-2"></i> Legalitas Perusahaan
+                        </h4>
+                        <p class="text-gray-400 text-xs md:text-sm">Nomor Induk Berusaha (NIB): <br/>
+                            <span class="text-white font-medium tracking-wide">202603-1409-1007-5574-041</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg md:text-xl font-bold text-white mb-6">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-gray-300 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot text-cyan-500 mt-1 w-6 flex-shrink-0"></i>
+                            <span><strong>Alamat Kantor:</strong><br/>Jl. Uranus III Blok M-2 No.19, Wanasari, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone text-cyan-500 w-6 flex-shrink-0"></i>
+                            <span>+62 852-8480-6269 (WhatsApp/Telp)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope text-cyan-500 w-6 flex-shrink-0"></i>
+                            <span>nankslamet25@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-6 md:pt-8 text-center text-gray-500 text-xs md:text-sm">
+                <p>&copy; 2026 Cibitung Frozen Seafood. All rights reserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://api.whatsapp.com/send?phone=6285284806269&text=Halo%20Tim%20Cibitung%20Frozen%20Seafood,%20saya%20tertarik%20untuk%20mendapatkan%20informasi%20seputar%20produk%20dan%20penawaran%20harga." target="_blank" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-green-500 hover:bg-green-600 text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-2xl md:text-3xl shadow-lg shadow-green-500/40 z-50 transition-transform hover:scale-110" aria-label="Chat WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Simple Script for Navbar Scroll Effect -->
+    <script>
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
